@@ -13,6 +13,3 @@ def unzip_gd_for_transcriptions(folder_with_lang_options, lang, transcriptions_f
         if lang in file_path and file_path.endswith('.zip'):
             with zipfile.ZipFile(file_path, 'r') as zip_ref:
                 zip_ref.extractall(os.path.join(transcriptions_folder))
-
-#Example:
-unzip_gd_for_transcriptions('qlt_unzipped_data_lang_options', 'castellano', 'transcriptions')
