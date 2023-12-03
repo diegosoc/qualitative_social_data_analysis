@@ -12,3 +12,4 @@ def unzip_gdmain_folders(folder_with_unzipped_data, unziped_gd_files_folder):
         if file_path.endswith('zip'):
             with zipfile.ZipFile(file_path, 'r') as zip_ref:
                 zip_ref.extractall(os.path.join(unziped_gd_files_folder))
+
