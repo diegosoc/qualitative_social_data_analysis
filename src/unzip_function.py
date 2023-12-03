@@ -28,6 +28,3 @@ def unzip_data(folder, studies_list, unziped_files_folder):
             with zipfile.ZipFile(file, 'r') as zip_ref:
                 zip_ref.extractall(unziped_files_folder)
             print(f"Se ha descomprimido {file} en {unziped_files_folder}")
-
-#Example:
-unzip_data('qualitative_zipped_data', ['325'], 'qualitative_unzipped_data')
