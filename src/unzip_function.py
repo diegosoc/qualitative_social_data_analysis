@@ -2,7 +2,7 @@ import os
 import zipfile
 
 #folder : You have to provide folder with zip file is
-#study_n : You have to provide a list of strings with the studies you are interested in (list = ['325','234'])
+#study_lst : You have to provide a list of strings with the studies you are interested in (list = ['325','234'])
 #unziped_files_folder : You have to provide folder where the files will be unzipped or create new one
 
 import os

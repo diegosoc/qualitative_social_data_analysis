@@ -1,19 +1,47 @@
+import os
 import pandas as pd
-import re
 
-def txt_to_df (file_path):
+# Función para procesar el archivo y extraer datos
+def process_file(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
 
-    with open(file_path, 'r', encoding='utf-8') as archivo:
-        contenido = archivo.read()
+    texts = []
+    informer = ""
+    mod = ""
 
-    texts = contenido.split('\n\n')
+    # Separar por participantes o el moderador
+    paragraphs = re.split(r'(M\d+:|MOD:)', content)
+    
+    # Inicializar variables para mantener el estado
+    for bloque in paragraphs:
+        if par.startswith('M'):
+            informer = par.strip(':').strip()
+        elif par.startswith('MOD'):
+            mod = par.strip(':').strip()
+        elif informer and par.strip():
+            text = par.strip()
+            texts.append((informer, text, mod))
 
-    texts_with_M = [text.strip() for text in texts if text.startswith('M') and text[1].isdigit()]
+    return texts
 
-    df = pd.DataFrame(texts_with_M, columns=['text'])
+def process_txtfiles_folder(input_folder, output_folder):
+    # Verificar si la carpeta de salida existe, si no, crearla
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 
-    df['informer'] = df['text'].apply(lambda x: re.search(r'M\d', x).group() if re.search(r'M\d', x) else '')
+    for file_name in os.listdir(input_folder):
+        if file_name.endswith('.txt'):
+            file_path = os.path.join(input_folder, file_name)
+            
+            # Procesar el archivo y crear el DataFrame
+            txt_df = pd.DataFrame(process_file(file_path), columns=["informer", "text", "mod"])
 
-    df['text'] = df['text'].apply(lambda x: re.sub(r'M\d', '', x).strip())
+            # Guardar el DataFrame como un archivo CSV en la carpeta de salida
+            output_file_path = os.path.join(output_folder, f'{os.path.splitext(file_name)[0]}.csv')
+            txt_df.to_csv(output_file_path, index=False)
 
-    return df
+# Ejemplo de uso
+input_folder = 'carpeta_de_entrada'  # Reemplaza con la carpeta real de tus archivos txt
+output_folder = 'carpeta_de_salida'  # Reemplaza con la carpeta donde deseas guardar los CSV
+process_txtfiles_folder(input_folder, output_folder)

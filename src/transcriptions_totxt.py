@@ -1,16 +1,18 @@
 import os
 from pdfminer.high_level import extract_text
+import re
 
-def convertir_pdf_a_txt_en_carpeta(transcriptions, transcriptionstxt):
+def pdf_to_txt(transcriptions, transcriptionstxt):
     if not os.path.exists(transcriptionstxt):
         os.makedirs(transcriptionstxt)
-    archivos_pdf = [archivo for archivo in os.listdir(transcriptions) if archivo.lower().endswith('.pdf')]
+    file_pdf = [file for file in os.listdir(transcriptions) if file.lower().endswith('.pdf')]
 
-    for archivo_pdf in archivos_pdf:
-        ruta_pdf = os.path.join(transcriptions, archivo_pdf)
-        ruta_txt = os.path.join(transcriptionstxt, os.path.splitext(archivo_pdf)[0] + '.txt')
-        texto = extract_text(ruta_pdf)
+    for file_pdf in file_pdf:
+        path_pdf = os.path.join(transcriptions, file_pdf)
+        path_txt = os.path.join(transcriptionstxt, os.path.splitext(file_pdf)[0] + '.txt')
+        text = extract_text(path_pdf)
 
-        with open(ruta_txt, "w", encoding='utf-8') as file_txt:
-            # Escribe el texto en el archivo de texto
-            file_txt.write(texto)
+        with open(path_txt, "w", encoding='utf-8') as file_txt:
+            file_txt.write(text)
+
+pdf_to_txt('transcriptions', 'textitos')
