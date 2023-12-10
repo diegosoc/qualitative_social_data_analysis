@@ -15,4 +15,4 @@ def pdf_to_txt(transcriptions, transcriptionstxt):
         with open(path_txt, "w", encoding='utf-8') as file_txt:
             file_txt.write(text)
 
-pdf_to_txt('transcriptions', 'textitos')
+pdf_to_txt('unziped_data3', 'unziped_data4')

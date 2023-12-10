@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import re
 
 # Función para procesar el archivo y extraer datos
 def process_file(file_path):
@@ -14,7 +15,7 @@ def process_file(file_path):
     paragraphs = re.split(r'(M\d+:|MOD:)', content)
     
     # Inicializar variables para mantener el estado
-    for bloque in paragraphs:
+    for par in paragraphs:
         if par.startswith('M'):
             informer = par.strip(':').strip()
         elif par.startswith('MOD'):
@@ -44,4 +45,4 @@ def process_txtfiles_folder(input_folder, output_folder):
 # Ejemplo de uso
 input_folder = 'carpeta_de_entrada'  # Reemplaza con la carpeta real de tus archivos txt
 output_folder = 'carpeta_de_salida'  # Reemplaza con la carpeta donde deseas guardar los CSV
-process_txtfiles_folder(input_folder, output_folder)
+process_txtfiles_folder('gd1example', 'gd1')

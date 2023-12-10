@@ -1,14 +1,17 @@
 import re
+import os 
 
-def edit_txt_files (folder_with_txt_files):
+def procesar_archivos_en_carpeta(carpeta):
+    # Obtener la lista de archivos en la carpeta
+    archivos = [f for f in os.listdir(carpeta) if f.endswith('.txt')]
 
-    for file in folder_with_txt_files:
-
-        filename = file
+    # Iterar sobre cada archivo
+    for archivo in archivos:
+        filename = os.path.join(carpeta, archivo)
 
         # Read the content of the file
 
-        with open(filename, 'r') as file:
+        with open(filename, 'r', encoding = 'utf-8') as file:
             content = file.read()
 
         # Split the content into paragraphs
@@ -24,10 +27,10 @@ def edit_txt_files (folder_with_txt_files):
         modified_content = ''.join(paragraphs)
 
         # Write the modified content back to the file
-        with open(filename, 'w') as file:
+        with open(filename, 'w', encoding = 'utf-8') as file:
             file.write(modified_content)
 
-        with open(filename, 'r') as file:
+        with open(filename, 'r', encoding = 'utf-8') as file:
             content = file.read()
 
         content = re.sub(r'^.*?\[Presentación inicial\].*?(\n|$)', '', content, flags=re.DOTALL)
@@ -62,9 +65,11 @@ def edit_txt_files (folder_with_txt_files):
         content = re.sub(r'\n(MOD:|M\d+:|H\d+:)', r'\n\n\1', content)
 
         # Write the modified content back to the file
-        with open(filename, 'w') as file:
+        with open(filename, 'w', encoding = 'utf-8') as file:
             file.write(content)
 
         # Read and print the modified content
-        with open(filename, 'r') as file:
+        with open(filename, 'r', encoding = 'utf-8') as file:
             modified_content = file.read()
+
+procesar_archivos_en_carpeta('unziped_data4')
