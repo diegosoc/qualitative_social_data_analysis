@@ -45,4 +45,4 @@ def process_txtfiles_folder(input_folder, output_folder):
 # Ejemplo de uso
 input_folder = 'carpeta_de_entrada'  # Reemplaza con la carpeta real de tus archivos txt
 output_folder = 'carpeta_de_salida'  # Reemplaza con la carpeta donde deseas guardar los CSV
-process_txtfiles_folder('gd1example', 'gd1')
+process_txtfiles_folder('unziped_data4', 'gd1')

@@ -23,7 +23,7 @@ fig = px.bar(informers_count, x='informer', y='count')
 
 # Personalizar el título y los ejes
 fig.update_layout(
-    title={'text': 'Cantidad de Mensajes por Informer', 'x': 0.5, 'y': 0.95, 'xanchor': 'center', 'yanchor': 'top'},
+    title={'text': 'Cantidad de Mensajes por Informante', 'x': 0.5, 'y': 0.95, 'xanchor': 'center', 'yanchor': 'top'},
     xaxis_title='Informer',
     yaxis_title='Cantidad de Mensajes',
     font=dict(family='Arial', size=14, color='black')  # Establecer el texto en negrita
