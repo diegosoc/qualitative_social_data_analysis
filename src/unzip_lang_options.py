@@ -1,8 +1,11 @@
 import os
 import zipfile
 
+# Once the GD folder is unzipped (unzip_gd_function.py) it is necessary to unzip another folder, is the language folder.
+# The folder that will be unzipped depends on what we are looking for.
+# If we need to work with the spanish transcriptions, we need to unzip that folder.
 
-def unzip_gd_for_transcriptions(folder_with_lang_options, lang, transcriptions_folder):
+def unzip_gd_for_transcriptions(folder_with_lang_options: str, lang: str, transcriptions_folder: str) -> folder:
     if not os.path.exists(folder_with_lang_options):
         print(f'The folder named {folder_with_lang_options} does not exist')
     if not os.path.exists(transcriptions_folder):
@@ -13,5 +16,6 @@ def unzip_gd_for_transcriptions(folder_with_lang_options, lang, transcriptions_f
         if lang in file_path and file_path.endswith('.zip'):
             with zipfile.ZipFile(file_path, 'r') as zip_ref:
                 zip_ref.extractall(os.path.join(transcriptions_folder))
-
-unzip_gd_for_transcriptions('unziped_data2', 'castellano', 'unziped_data3')
+                
+# Example of usage:
+# unzip_gd_for_transcriptions('unziped_data2', 'castellano', 'unziped_data3')
