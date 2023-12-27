@@ -16,7 +16,7 @@ stopwords_add = ['tal', 'vez', 'todo', 'toda', 'todos', 'todas', 'tal', 'si', 'n
 
 
 #Cleaning text function. We delete some special icons and other things.
-def cleaning_text(text):
+def cleaning_text(text: str) -> str:
 
  text = re.sub(r'\W', ' ', str(text))
  text = re.sub(r'\s+[a-zA-Z]\s+', ' ', text)
@@ -32,7 +32,7 @@ df_cleaned.head(10)
 
 
 #Create a function to drop the stopwords:
-def drop_stopwords(texto):
+def drop_stopwords(texto: str) -> str:
     palabras = texto.split()
     palabras_filtradas = [palabra for palabra in palabras if palabra.lower() not in stop_words_esp]
     return ' '.join(palabras_filtradas)
@@ -55,7 +55,7 @@ plt.title('Wordcloud of all the study')
 plt.show()
 
 #Create a function to get Wordcloud to each informer:
-def word_cloud_informer (df):
+def word_cloud_informer (df: pd.DataFrame) -> Wordcloud:
   informers = df['informer'].unique()
   for informer in informers:
     df_to_use = df[df['informer'] == informer]
