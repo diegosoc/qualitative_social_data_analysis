@@ -3,17 +3,20 @@ import pandas as pd
 import plotly.graph_objects as go
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-def tfidf_informer(df):
+# One of the most important information that we can get from some documents is the key terms.
+# Using TF-IDF metrics we can see which terms are most important.
+# It can be usefull for social scientist. We can se, for the informers, the most important termins used by each one:
+
+def tfidf_informer(df: pd.DataFrame) -> bar charts:
+    # Extract the informers index:
     informers = df['informer'].unique()
+
+    # Calculate the TF-IDF for each informer:
     for informer in informers:
         df_to_use = df[df['informer'] == informer]
-
         tfidf_vectorizer = TfidfVectorizer(stop_words=stop_words_esp)
-
         tfidf_matrix = tfidf_vectorizer.fit_transform(df_to_use['text_cleaned'])
-
         feature_names = tfidf_vectorizer.get_feature_names_out()
-
         puntuaciones_medias = np.mean(tfidf_matrix, axis=0).tolist()[0]
         puntuaciones = list(zip(feature_names, puntuaciones_medias))
 
