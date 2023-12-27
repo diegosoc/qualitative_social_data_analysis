@@ -5,7 +5,7 @@ import pandas as pd
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
-
+#I downloaded a spanish stopword's bag, but I added some more stopwords that don't give key information:
 stop_words_espanol = set(stopwords.words('spanish'))
 stopwords_add = ['tal', 'vez', 'todo', 'toda', 'todos', 'todas', 'tal', 'si', 'no', 'sí', 'creo', 'cómo', 'decía', 'año', 'tema', 'entonces',
                  'claor', 'bueno', 'decir', 'ahora', 'aquí','sé', 'día', 'puede', 'ejemplo', 'claro', 'gente', 'cosa', 'después', 'ver',
@@ -42,6 +42,17 @@ def drop_stopwords(texto):
 df_cleaned['text_cleaned_nstopwords'] = df['text_cleaned'].apply(drop_stopwords)
 df_cleaned.head(10)
 
+
+#Define the documents / text without stopwords:
+todos_los_mensajes = ' '.join(df_cleaned['text_cleaned_nstopwords'])
+
+# Create a Wordcloud for all the documents / text:
+wordcloud = WordCloud(width=800, height=400, background_color='white', max_words=50).generate(todos_los_mensajes)
+plt.figure(figsize=(10, 5))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+plt.title('Wordcloud of all the study')
+plt.show()
 
 #Create a function to get Wordcloud to each informer:
 def word_cloud_informer (df):
