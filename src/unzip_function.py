@@ -1,9 +1,9 @@
 import os
 import zipfile
 
-#It is necessary to create a function to unzip the CIS folder:
+#It is necessary to create a function to unzip the first CIS folder that appears when we download the study information (CL folder):
 
-def unzip_data(studies_folder: str, studies_list: list, unziped_files_folder: str) -> folder:
+def unzip_CL_folder (studies_folder: str, studies_list: list, unziped_files_folder: str) -> folder:
     if not os.path.exists(studies_folder):
         print(f'The folder named {studies_folder} does not exist')
         return
@@ -24,4 +24,5 @@ def unzip_data(studies_folder: str, studies_list: list, unziped_files_folder: st
                 zip_ref.extractall(unziped_files_folder)
             print(f"{folder} has been unzipped in {unziped_files_folder}")
 
-unzip_data('qualitative_zipped_data', [3251], 'unziped_data')
+# Example of usage:
+# unzip_CL_folder ('qualitative_zipped_data', [3251], 'unziped_data')
