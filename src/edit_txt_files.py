@@ -4,7 +4,7 @@ import os
 #It is necessary to create a function to process the text files in order to get ready to transform in a Dataframe and work with it:
 #This step depends on the style of the CIS documents, I took the example of the most recent studies, but it could be different:
 
-def process_file_in_folder (folder: str):
+def process_file_in_folder (folder: str) -> Processed files:
     
     # Get a list with the files in folder:
     files = [f for f in os.listdir(folder) if f.endswith('.txt')]
