@@ -2,6 +2,8 @@ import os
 from pdfminer.high_level import extract_text
 import re
 
+# It is necessary to transform the PDF files into text files to process them well:
+
 def pdf_to_txt(folder_transcriptions: str, folder_transcriptions_txt: str) -> Processed files:
     if not os.path.exists(folder_transcriptions_txt):
         os.makedirs(folder_transcriptions_txt)
@@ -15,4 +17,4 @@ def pdf_to_txt(folder_transcriptions: str, folder_transcriptions_txt: str) -> Pr
         with open(path_txt, "w", encoding='utf-8') as file_txt:
             file_txt.write(text)
 
-pdf_to_txt('unziped_data3', 'unziped_data4')
+# pdf_to_txt('unziped_data3', 'unziped_data4')
