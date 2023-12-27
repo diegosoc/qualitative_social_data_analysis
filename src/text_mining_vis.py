@@ -15,7 +15,7 @@ stopwords_add = ['tal', 'vez', 'todo', 'toda', 'todos', 'todas', 'tal', 'si', 'n
                  'seguimos', 'da', 'de', 'dé', 'aquel', 'tan', 'mas', 'más']
 
 
-#Cleaning text function. We delete some special icons and other things.
+#Create a cleaning text function. We delete some special icons and more:
 def cleaning_text(text: str) -> str:
 
  text = re.sub(r'\W', ' ', str(text))
@@ -25,7 +25,7 @@ def cleaning_text(text: str) -> str:
 
  return text
 
-#Apply our cleaning text function to our dataframe
+#Apply our cleaning text function to our dataframe:
 df_cleaned = df
 df_cleaned["text_cleaned"] = df_cleaned.text.apply(cleaning_text)
 df_cleaned.head(10)
