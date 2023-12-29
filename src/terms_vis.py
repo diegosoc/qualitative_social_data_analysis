@@ -21,6 +21,7 @@ stopwords_add = ['tal', 'vez', 'todo', 'toda', 'todos', 'todas', 'tal', 'si', 'n
                  'seguimos', 'da', 'de', 'dé', 'aquel', 'tan', 'mas', 'más']
 
 stop_words_espanol.update(stopwords_add)
+
 # Transform set into list:
 stop_words_esp = list(stop_words_espanol)
 
@@ -72,6 +73,7 @@ fig.update_layout(
 fig.show()
 
 # Create a function to get TF-IDF information of each informer:
+
 def tfidf_informer(df: pd.DataFrame) -> bar charts:
     # Extract the informers index:
     informers = df['informer'].unique()

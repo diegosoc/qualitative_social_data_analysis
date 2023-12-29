@@ -4,7 +4,7 @@ import re
 
 # It is necessary to transform the PDF files into text files to process them well:
 
-def pdf_to_txt(folder_transcriptions: str, folder_transcriptions_txt: str) -> Processed files:
+def pdf_to_txt (folder_transcriptions: str, folder_transcriptions_txt: str):
     if not os.path.exists(folder_transcriptions_txt):
         os.makedirs(folder_transcriptions_txt)
     file_pdf = [file for file in os.listdir(folder_transcriptions) if file.lower().endswith('.pdf')]
@@ -17,4 +17,5 @@ def pdf_to_txt(folder_transcriptions: str, folder_transcriptions_txt: str) -> Pr
         with open(path_txt, "w", encoding='utf-8') as file_txt:
             file_txt.write(text)
 
-# pdf_to_txt('unziped_data3', 'unziped_data4')
+# Example of usage:
+pdf_to_txt ('unzipped_LANG_data', 'transcriptions_txt_folder')

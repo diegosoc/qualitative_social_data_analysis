@@ -6,7 +6,7 @@ import re
 # These files weill be saved as CSV files in a folder to be used in any time.
 
 # 1. Function to create 
-def process_file(file_path: Path) -> list:
+def process_file (file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
         texts = []
@@ -21,33 +21,30 @@ def process_file(file_path: Path) -> list:
         if par.startswith('M'):
             informer = par.strip(':').strip()
         elif par.startswith('H'):
-            mod = par.strip(':').strip()
+            informer = par.strip(':').strip()
         elif par.startswith('MOD'):
             mod = par.strip(':').strip()
         elif informer and par.strip():
             text = par.strip()
-            texts.append((informer, text, mod))
+            texts.append((informer, text))
     return texts
 
 # 2. Function to process the files transforming them into dataframes and save them as CSV files:
-def process_txtfiles_folder(input_folder: str, output_folder: str) -> Processed files:
+def process_txt_files_folder (txt_files_folder: str, output_folder: str):
     
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
-    for file_name in os.listdir(input_folder):
+    for file_name in os.listdir(txt_files_folder):
         if file_name.endswith('.txt'):
-            file_path = os.path.join(input_folder, file_name)
+            file_path = os.path.join(txt_files_folder, file_name)
             
             # Pocess the file and create the dataframe
-            txt_df = pd.DataFrame(process_file(file_path), columns=["informer", "text", "mod"])
+            txt_df = pd.DataFrame(process_file(file_path), columns=["informer", "text"])
 
             # Save the dataframe into CSV file:
             output_file_path = os.path.join(output_folder, f'{os.path.splitext(file_name)[0]}.csv')
             txt_df.to_csv(output_file_path, index=False)
 
 # Usage examle:
-#input_folder = 'carpeta_de_entrada'
-#output_folder = 'carpeta_de_salida'
-
-#process_txtfiles_folder('unziped_data4', 'gd1')
+process_txt_files_folder ('transcription_txt_ed_folder', 'dataframes_folder')
