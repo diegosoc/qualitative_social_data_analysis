@@ -19,8 +19,6 @@ Here you can find some AI tools for qualitative research in social science
 
 ![alt text](visualizations/distance_inter_informer.png)
 
-![alt text](visualizations/wordcloud_all_doc.png)
-
 ![alt text](visualizations/tfidf_terms_alldoc.png)
 
 ![alt text](visualizations/tfidf_terms_h2.png)
