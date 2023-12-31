@@ -1,6 +1,5 @@
 import os
 from pdfminer.high_level import extract_text
-import re
 
 # It is necessary to transform the PDF files into text files to process them well:
 

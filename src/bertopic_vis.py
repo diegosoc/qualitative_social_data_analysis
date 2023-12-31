@@ -1,6 +1,32 @@
 from bertopic import BERTopic
 from sklearn.feature_extraction.text import CountVectorizer
 
+#EXAMPLE WITH THE TRANSCRIPTION OF THE STUDIE E3251_GD04
+
+# Insert CSV file from the CVS files folder:
+df = pd.read_csv('C:/Users/diego/Desktop/Mis repositorios/qualitative_social_data_analysis/dataframes_folder/E3251_GD04.csv')
+
+def limpiar_texto(texto):
+
+ texto = re.sub(r'\W', ' ', str(texto))
+ texto = re.sub(r'\s+[a-zA-Z]\s+', ' ', texto)
+ texto = re.sub(r'\s+', ' ', texto, flags=re.I)
+ texto = texto.lower()
+
+ return texto
+
+df["text_cleaned"] = df.text.apply(limpiar_texto)
+
+stop_words_span = set(stopwords.words('spanish'))
+stopwords_add = ['dos', 'tal', 'vez', 'todo', 'toda', 'todos', 'todas', 'tal', 'si', 'no', 'sí', 'creo', 'cómo', 'decía', 'año', 'tema', 'entonces',
+                 'claor', 'bueno', 'decir', 'ahora', 'aquí','sé', 'día', 'puede', 'ejemplo', 'claro', 'gente', 'cosa', 'después', 'ver',
+                 'eh', 'pues', 'quiero', 'dice', 'cosas', 'momento', 'mucha', 'años', 'mucho', 'muchas', 'muchos', 'bien', 'hecho', 'ser', 'ir',
+                 'mejor', 'así', 'gusta', 'alguien', 'hablando', 'ser', 'dices', 'veces', 'siempre', 'persona', 'vale', 'gustaría', 'parece',
+                 'menos', 'voy', 'hace', 'hacer', 'depende', 'digamos', 'tampoco', 'va', 'cada', 'mismo', 'digo', 'sido', 'dónde', 'veo',
+                 'seguimos', 'da', 'de', 'dé', 'aquel', 'tan', 'mas', 'más']
+
+stop_words_span.update(stopwords_add)
+
 #We can use CountVectorizer or other tool to get the embeddings. In this case I used CountVectorizer:
 vectorizer_model = CountVectorizer(stop_words=stop_words_esp)
 bert_model = BERTopic(language="spanish", vectorizer_model=vectorizer_model)
