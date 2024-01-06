@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print
-        run: echo "This step will always run"
+        run: echo "This is a confirmation"
