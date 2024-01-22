@@ -6,9 +6,6 @@ from nltk.corpus import stopwords
 
 # EXAMPLE WITH THE TRANSCRIPTION OF THE STUDIE E3251_GD04
 
-# Insert CSV file from the CVS files folder:
-
-
 def limpiar_texto(texto):
     texto = re.sub(r"\W", " ", str(texto))
     texto = re.sub(r"\s+[a-zA-Z]\s+", " ", texto)
@@ -108,9 +105,13 @@ def create_stopwords_span():
 
 
 def main():
-    df = pd.read_csv(
-        "C:/Users/diego/Desktop/Mis repositorios/qualitative_social_data_analysis/dataframes_folder/E3251_GD04.csv"
-    )
+
+    """
+    With BERTopic we are able to to create great visualizations for our qualitative data.
+
+    """
+
+    df = pd.read_csv('')
 
     df["text_cleaned"] = df.text.apply(limpiar_texto)
 

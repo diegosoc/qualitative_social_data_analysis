@@ -1,13 +1,17 @@
 import re
 import os
 
-# It is necessary to create a function to process the text files in order to get ready to transform in a Dataframe and work with it:
-# This step depends on the style of the CIS documents, I took the example of the most recent studies, but it could be different:
-
-
 def process_file_in_folder(
     folder_transcriptions_txt: str, transcription_txt_ed_folder: str
 ):
+    
+    """
+    It is necessary to create a function to process the text files in order 
+    to get ready to transform in a Dataframe and work with it. This step depends on the style 
+    of the CIS documents, I took the example of the most recent studies, but it could be different. 
+    This function give us new txt files edited in a new folder. 
+
+    """
     # Get a list with the files in folder:
     files = [f for f in os.listdir(folder_transcriptions_txt) if f.endswith(".txt")]
 
@@ -32,10 +36,10 @@ def process_file_in_folder(
             if not any(c.islower() for c in paragraph):
                 paragraphs[i] = f"MOD: {paragraph.lstrip()}"
 
-        # Join the modified paragraphs back together
+        # Join the modified paragraphs back together:
         modified_content = "".join(paragraphs)
 
-        # Eliminate from the start to [Presentación inicial]
+        # Eliminate from the start to [Presentación inicial]:
         modified_content = re.sub(
             r"^.*?\[Presentación inicial\].*?(\n|$)",
             "",
@@ -43,24 +47,24 @@ def process_file_in_folder(
             flags=re.DOTALL,
         )
 
-        # Use regular expressions to remove paragraphs starting with '*'
+        # Use regular expressions to remove paragraphs starting with '*':
         modified_content = re.sub(
             r"\*.*?(\n\n|\n$)", "", modified_content, flags=re.DOTALL
         )
 
-        # Use regular expressions to remove lines with just numbers
+        # Use regular expressions to remove lines with just numbers:
         modified_content = re.sub(r"\b\d+\b", "", modified_content)
 
         modified_content = re.sub(
             r"\x0C.*?(\n|$)", "", modified_content, flags=re.DOTALL
         )
 
-        # Eliminate lines starting with '(' and all lines until a line ending with ')'
+        # Eliminate lines starting with '(' and all lines until a line ending with ')':
         modified_content = re.sub(
             r"\(.*?\).*?(\n|$)", "", modified_content, flags=re.DOTALL
         )
 
-        # Ensure at most one empty line between non-empty lines
+        # Ensure at most one empty line between non-empty lines:
         modified_content = re.sub(r"(\n\s*){2,}", r"\n\n", modified_content)
 
         # Remove lines that only contain 'MOD :'
@@ -68,18 +72,18 @@ def process_file_in_folder(
             r"^\s*MOD\s*:\s*\n", "", modified_content, flags=re.MULTILINE
         )
 
-        # Add a newline before 'MOD :' if it's not at the beginning of a line
+        # Add a newline before 'MOD :' if it's not at the beginning of a line:
         modified_content = re.sub(r"(?<!\n)MOD:", "\nMOD:", modified_content)
 
-        # Remove extra empty lines
+        # Remove extra empty lines:
         modified_content = modified_content.replace("\n\n", "\n")
 
-        # Add a newline before 'MOD :' or 'MX:' if it's not at the beginning of a line
+        # Add a newline before 'MOD :' or 'MX:' if it's not at the beginning of a line:
         modified_content = re.sub(
             r"(?<!\n)(MOD:|M\d+:|H\d+:)", r"\n\1", modified_content
         )
 
-        # Add a newline before 'MOD :' or 'MX:' if it's not at the beginning of a line
+        # Add a newline before 'MOD :' or 'MX:' if it's not at the beginning of a line:
         modified_content = re.sub(r"\n(MOD:|M\d+:|H\d+:)", r"\n\n\1", modified_content)
 
         # Modification added to correct errors of the first correction:
@@ -98,9 +102,9 @@ def process_file_in_folder(
             flags=re.DOTALL,
         )
 
-        # Write the modified content back to the file
+        # Write the modified content back to the file:
         with open(output_file, "w", encoding="utf-8") as file:
             file.write(modified_content)
 
 
-process_file_in_folder("transcriptions_txt_folder", "transcription_txt_ed_folder")
+# Example of use: process_file_in_folder("data/transcriptions_txt_folder", "data/transcription_txt_ed_folder")
