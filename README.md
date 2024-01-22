@@ -9,6 +9,7 @@
 ![alt text](visualizations/informer_interventions.png)
 
 ## Topic analysis with BERTopic:
+
 ![alt text](visualizations/topic_word_scores.png)
 
 ![alt text](visualizations/intertopic_distance_map.png)
@@ -16,12 +17,6 @@
 ![alt text](visualizations/documents_and_topics.png)
 
 ![alt text](visualizations/hierarchical_cluster.png)
-
-## Distance Inter-informer:
-
-![alt text](visualizations/distance_inter_informer.png)
-
-## TF-IDF Scores for each term:
 
 ![alt text](visualizations/tfidf_terms_alldoc.png)
 
