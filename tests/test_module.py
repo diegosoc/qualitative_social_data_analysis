@@ -11,19 +11,18 @@ class TestUnzipCL:
 
     def create_temp_zip_files(self, tmp_path):
 
-        # Crear archivos zip de prueba en un directorio temporal
+        # Create temo dict:
         temp_zip_folder = tmp_path / "studies_temp_folder"
         temp_zip_folder.mkdir()
 
-        # Nombres de estudio de prueba
+        # Temp studies numbers:
         study_numbers = [3251, 1234, 5678]
 
         for study_number in study_numbers:
             zip_file_path = temp_zip_folder / f"{study_number}.zip"
             with zipfile.ZipFile(zip_file_path, "w") as zip_file:
                 zip_file.writestr(f"{study_number}_file.txt", "Content")
-
-        # Directorio de destino para la descompresión
+                
         unzipped_folder = tmp_path / "unzipped_CL_data"
 
         return temp_zip_folder, study_numbers, unzipped_folder
@@ -32,10 +31,10 @@ class TestUnzipCL:
 
         zip_folder, study_numbers, unzipped_folder = create_temp_zip_files
 
-        # Ejecutar la función bajo prueba
+        # Test function:
         unzip_CL_folder(zip_folder, study_numbers, unzipped_folder)
 
-        # Verificar que los archivos se han descomprimido correctamente
+        # Verify function is working well:
         for study_number in study_numbers:
             unzipped_file_path = unzipped_folder / f"{study_number}_file.txt"
             assert unzipped_file_path.is_file()
