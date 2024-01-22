@@ -1,10 +1,5 @@
-
-import os
-import pandas as pd
 import pytest
-import shutil
 import zipfile
-from src._4_pdf_to_txt_function import pdf_to_txt
 from src._1_unzip_CL_function import unzip_CL_folder
 
 # Module created to testing the data resource creation:
