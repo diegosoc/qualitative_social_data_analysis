@@ -50,5 +50,4 @@ def process_txt_files_folder(txt_files_folder: str, output_folder: str):
             txt_df.to_csv(output_file_path, index=False)
 
 
-# Usage examle:
-process_txt_files_folder("transcription_txt_ed_folder", "dataframes_folder")
+# Example of use: process_txt_files_folder("data/transcription_txt_ed_folder", "data/dataframes_folder")

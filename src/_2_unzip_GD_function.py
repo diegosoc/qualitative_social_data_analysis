@@ -1,10 +1,14 @@
 import os
 import zipfile
 
-# Once the CL folder is unziped (unzip_function.py), it is necessary to unzip another folder (GD{study code}).
-
-
 def unzip_gd_folders(folder_with_CL_unzipped_data: str, unzipped_gd_files_folder: str):
+
+    """ 
+    This function unzip the zip file (with the information about the
+    discusion group - GD -) in the folder which contains the last unzip files
+    from the first unzip function.
+    
+    """
     if not os.path.exists(folder_with_CL_unzipped_data):
         print(f"The folder named {folder_with_CL_unzipped_data} does not exist")
     if not os.path.exists(unzipped_gd_files_folder):
@@ -17,5 +21,4 @@ def unzip_gd_folders(folder_with_CL_unzipped_data: str, unzipped_gd_files_folder
                 zip_ref.extractall(os.path.join(unzipped_gd_files_folder))
 
 
-# Example of usage:
-unzip_gd_folders("unzipped_CL_data", "unzipped_GD_data")
+# Example of use: unzip_gd_folders("data/unzipped_CL_data", "data/unzipped_GD_data")

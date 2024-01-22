@@ -1,10 +1,14 @@
 import os
 from pdfminer.high_level import extract_text
 
-# It is necessary to transform the PDF files into text files to process them well:
-
-
 def pdf_to_txt(folder_transcriptions: str, folder_transcriptions_txt: str):
+
+    """
+    We need to read the transcriptions to work with them in Python. So, first, we need to transform
+    the pdf files into txt files. This function transform every single pdf file in the folder provided
+    and give us the txt file for each transcription in a new folder. 
+    
+    """
     if not os.path.exists(folder_transcriptions_txt):
         os.makedirs(folder_transcriptions_txt)
     file_pdf = [
@@ -24,5 +28,4 @@ def pdf_to_txt(folder_transcriptions: str, folder_transcriptions_txt: str):
             file_txt.write(text)
 
 
-# Example of usage:
-pdf_to_txt("unzipped_LANG_data", "transcriptions_txt_folder")
+# Example of use: pdf_to_txt("data/unzipped_LANG_data", "data/transcriptions_txt_folder")
