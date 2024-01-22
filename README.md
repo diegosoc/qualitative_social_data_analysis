@@ -1,3 +1,6 @@
+#QUALITATIVE DATA ANALYSIS WITH IA TOOLS
+##Diego Dorrego
+This repository shows some tools social data scientist can use in their analysis:
 ![alt text](visualizations/wordcloud_all_doc.png)
 
 ![alt text](visualizations/wordcloud_h1.png)
