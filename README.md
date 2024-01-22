@@ -1,17 +1,19 @@
 # QUALITATIVE DATA ANALYSIS WITH IA TOOLS
 ## Diego Dorrego
 This repository shows some tools social data scientist can use in their analysis:
+
+### WORDCLOUDS:
 ![alt text](visualizations/wordcloud_all_doc.png)
 
 ![alt text](visualizations/wordcloud_h1.png)
 
 ![alt text](visualizations/wordcloud_m1.png)
 
-## Informer interventions:
+### INFORMER INTERVENTIONS:
 
 ![alt text](visualizations/informer_interventions.png)
 
-## Topic analysis with BERTopic:
+### TOPIC ANALYSIS WITH BERTOPIC:
 
 ![alt text](visualizations/topic_word_scores.png)
 
@@ -20,6 +22,8 @@ This repository shows some tools social data scientist can use in their analysis
 ![alt text](visualizations/documents_and_topics.png)
 
 ![alt text](visualizations/hierarchical_cluster.png)
+
+### TF-IDF SCORE FOR EACH TERM IN DOCUMENTS:
 
 ![alt text](visualizations/tfidf_terms_alldoc.png)
 
