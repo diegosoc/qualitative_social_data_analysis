@@ -1,11 +1,3 @@
-# Qualitative_social_data_analysis
-## Diego Dorrego
-
-Here you can find some AI tools for qualitative research in social science. It can help social scientist
-to do their analysis:
-
-## WordClouds:
-
 ![alt text](visualizations/wordcloud_all_doc.png)
 
 ![alt text](visualizations/wordcloud_h1.png)
