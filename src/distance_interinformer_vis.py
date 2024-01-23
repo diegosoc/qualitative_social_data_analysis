@@ -40,7 +40,7 @@ def remove_stopwords(texto: str):
 
     return ' '.join(palabras_filtradas)
 
-def prepare_embeddings ():
+def get_embeddings ():
     df = pd.read_csv('E3251_GD04.csv')
     df['text'] = df['text'].apply(limpiar_texto)
     df['text'] = df['text'].apply(remove_stopwords)
@@ -48,12 +48,12 @@ def prepare_embeddings ():
     embeddings_df = []
     for x in df['text']:
         embeddings_df.append(model.encode(x))
+    df[['PC1', 'PC2']] = pd.DataFrame(embeddings_df_reduced, columns=['PC1', 'PC2'])
     return embeddings_df
     
 def main ():
     tsne = TSNE(n_components=2)
-    embeddings_df_reduced = tsne.fit_transform(np.array(prepare_embeddings))
-    df[['PC1', 'PC2']] = pd.DataFrame(embeddings_df_reduced, columns=['PC1', 'PC2'])
+    embeddings_df_reduced = tsne.fit_transform(np.array(get_embeddings))
     resultados_media = df.groupby('informer').agg({'PC1': 'mean', 'PC2': 'mean'}).reset_index()
     centroides = df.groupby('informer').agg({'PC1': 'mean', 'PC2': 'mean'}).reset_index()
     # Crear un gráfico de dispersión con Plotly solo para los centroides
