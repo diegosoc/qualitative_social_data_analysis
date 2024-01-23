@@ -1,6 +1,7 @@
 from bertopic import BERTopic
 import matplotlib.pyplot as plt
 import nltk
+import numpy as np
 from nltk.corpus import stopwords
 import pandas as pd
 import plotly.express as px
@@ -40,26 +41,28 @@ def remove_stopwords(texto: str):
 
     return ' '.join(palabras_filtradas)
 
-def get_embeddings ():
+def get_df_with_embeddings_reduced (df):
+    model = SentenceTransformer('hiiamsid/sentence_similarity_spanish_es')
+    embeddings_list = []
+    for x in df['text']:
+        embeddings_df.append(model.encode(x))
+
+    '''
+    Now we can reduce the embeddings dimensionality by using T-SNE algorithm:
+    
+    '''
+
+    tsne = TSNE(n_components=2)
+    embeddings_reduced = tsne.fit_transform(np.array(embeddings_list))
+    return embeddings_reduced
+    
+def main (): 
     df = pd.read_csv('E3251_GD04.csv')
     df['text'] = df['text'].apply(limpiar_texto)
     df['text'] = df['text'].apply(remove_stopwords)
-    model = SentenceTransformer('hiiamsid/sentence_similarity_spanish_es')
-    embeddings_df = []
-    for x in df['text']:
-        embeddings_df.append(model.encode(x))
-    df[['PC1', 'PC2']] = pd.DataFrame(embeddings_df_reduced, columns=['PC1', 'PC2'])
-    return embeddings_df
-    
-def main ():
-    tsne = TSNE(n_components=2)
-    embeddings_df_reduced = tsne.fit_transform(np.array(get_embeddings))
-    resultados_media = df.groupby('informer').agg({'PC1': 'mean', 'PC2': 'mean'}).reset_index()
+    df[['PC1', 'PC2']] = pd.DataFrame(get_df_with_embeddings_reduced(), columns=['PC1', 'PC2'])
     centroides = df.groupby('informer').agg({'PC1': 'mean', 'PC2': 'mean'}).reset_index()
-    # Crear un gráfico de dispersión con Plotly solo para los centroides
     fig = px.scatter(centroides, x='PC1', y='PC2', color='informer', size=[10]*len(centroides), title='Gráfico de Dispersión con Centroides')
-
-    # Personalizar el diseño del gráfico
     fig.update_layout(xaxis_title='Variable x', yaxis_title='Variable y')
     axis = 11
     fig.update_yaxes(range=[-axis, axis])
@@ -68,5 +71,5 @@ def main ():
     # Mostrar el gráfico
     fig.show()
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
