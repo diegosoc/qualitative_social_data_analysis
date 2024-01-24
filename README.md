@@ -23,6 +23,10 @@ This repository shows some tools social data scientist can use in their analysis
 
 ![alt text](visualizations/hierarchical_cluster.png)
 
+### INTER-INFORMER DISTANCE:
+
+![alt text](visualizations/inter_informer_distance.png)
+
 ### TF-IDF SCORE FOR EACH TERM IN DOCUMENTS:
 
 ![alt text](visualizations/tfidf_terms_alldoc.png)
